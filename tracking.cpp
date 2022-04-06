@@ -1,6 +1,5 @@
 /*
-By downloading, copying, installing or using the software you agree to 
-this license.
+By downloading, copying, installing or using the software you agree to this license.
 If you do not agree to this license, do not download, install,
 copy or use the software.
                   License Agreement For libfacedetection
@@ -9,36 +8,26 @@ Copyright (c) 2018-2020, Shiqi Yu, all rights reserved.
 shiqi.yu@gmail.com
 Copyright (c) 2022, Xiaoheng Xia, all rights reserved.
 xia.xh@sjtu.edu.cn
-Redistribution and use in source and binary forms, with or without 
-modification,
+Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
   * Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-  * Redistributions in binary form must reproduce the above copyright 
-notice,
-    this list of conditions and the following disclaimer in the 
-documentation
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
     and/or other materials provided with the distribution.
-  * Neither the names of the copyright holders nor the names of the 
-contributors
+  * Neither the names of the copyright holders nor the names of the contributors
     may be used to endorse or promote products derived from this software
     without specific prior written permission.
-This software is provided by the copyright holders and contributors "as 
-is" and
-any express or implied warranties, including, but not limited to, the 
-implied
-warranties of merchantability and fitness for a particular purpose are 
-disclaimed.
-In no event shall copyright holders or contributors be liable for any 
-direct,
+This software is provided by the copyright holders and contributors "as is" and
+any express or implied warranties, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose are disclaimed.
+In no event shall copyright holders or contributors be liable for any direct,
 indirect, incidental, special, exemplary, or consequential damages
-(including, but not limited to, procurement of substitute goods or 
-services;
+(including, but not limited to, procurement of substitute goods or services;
 loss of use, data, or profits; or business interruption) however caused
 and on any theory of liability, whether in contract, strict liability,
 or tort (including negligence or otherwise) arising in any way out of
-the use of this software, even if advised of the possibility of such 
-damage.
+the use of this software, even if advised of the possibility of such damage.
 */
 
 
@@ -95,8 +84,7 @@ atomic <bool> body_detect_done_thread_flag{false};
 
 int * pResults = NULL; 
 //pBuffer is used in the detection functions.
-//If you call functions in multiple threads, please create one buffer for 
-each thread!
+//If you call functions in multiple threads, please create one buffer for each thread!
 unsigned char * pBuffers[1024];//large enough
 int num_thread = 4;
 unsigned char * p0;
@@ -141,38 +129,30 @@ void gpio_init(){
 
 void show_left_right(Mat &result_image, int right_or_left){
     // if(right_or_left > 0){
-    //     cv::putText(result_image, "RIGHT", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     cv::putText(result_image, "RIGHT", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
     // else if(right_or_left < 0){
-    //     cv::putText(result_image, "LEFT", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     cv::putText(result_image, "LEFT", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
     // else{
-    //     // cv::putText(result_image, "NONE", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     // cv::putText(result_image, "NONE", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
-    cv::putText(result_image, to_string(right_or_left), cv::Point(100, 
-100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);
+    cv::putText(result_image, to_string(right_or_left), cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);
 }
 
 int is_forwarding = 0;
 
 void show_forwarding(Mat &result_image, int is_forwarding){
     // if(right_or_left > 0){
-    //     cv::putText(result_image, "RIGHT", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     cv::putText(result_image, "RIGHT", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
     // else if(right_or_left < 0){
-    //     cv::putText(result_image, "LEFT", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     cv::putText(result_image, "LEFT", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
     // else{
-    //     // cv::putText(result_image, "NONE", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+    //     // cv::putText(result_image, "NONE", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
     // }
-    cv::putText(result_image, to_string(is_forwarding), cv::Point(0, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);
+    cv::putText(result_image, to_string(is_forwarding), cv::Point(0, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);
 }
 
 
@@ -308,8 +288,7 @@ void turning(){
         }
         else{
 
-            // cv::putText(result_image, "NONE", cv::Point(100, 100), 
-cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
+            // cv::putText(result_image, "NONE", cv::Point(100, 100), cv::FONT_HERSHEY_SIMPLEX, 2, cv::Scalar(0, 0, 255), 1);       
         }
         
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
@@ -322,8 +301,7 @@ void frame_write(){
     Mat input, blob;
     VideoCapture capture;
     frame_buffer.clear();
-    // 
-capture.open("rtsp://pi:11Appleseed@192.168.50.56:554/h264/ch36/main/av_stream");
+    // capture.open("rtsp://pi:11Appleseed@192.168.50.56:554/h264/ch36/main/av_stream");
     // capture.open(0);
     capture.open("rtsp://localhost:8554/mystream");
     if(capture.isOpened())
@@ -341,14 +319,12 @@ capture.open("rtsp://pi:11Appleseed@192.168.50.56:554/h264/ch36/main/av_stream")
                 frame_buffer.push_back(input);
                 if (frame_buffer.size() > 15){ // 隔帧抽取一半删除
                     auto iter = frame_buffer.begin();
-                    for(int inde = 0; inde < frame_buffer.size()/2 ; 
-inde++)
+                    for(int inde = 0; inde < frame_buffer.size()/2 ; inde++)
                         frame_buffer.erase(iter++);
                 }
             }
             else{
-                cout << "thread ==============> after read stop, 
-frame_buffer.size() > 100 , write stop";
+                cout << "thread ==============> after read stop, frame_buffer.size() > 100 , write stop";
                 return;
             }
             mtx.unlock();
@@ -368,14 +344,12 @@ void frame_read(){
     while(frame_buffer.empty());
     if(!frame_buffer.empty()){
         frame = frame_buffer.back();
-        // pResults = facedetect_cnn(pBuffers[0], image.ptr<unsigned 
-char>(0), (int)image.cols, (int)image.rows, (int)image.step);
+        // pResults = facedetect_cnn(pBuffers[0], image.ptr<unsigned char>(0), (int)image.cols, (int)image.rows, (int)image.step);
     }
 
     int original_width = frame.cols;
     int original_height = frame.rows;
-    printf("original_width = %d, original_height = %d", original_width, 
-original_height);
+    printf("original_width = %d, original_height = %d", original_width, original_height);
 
     int im_width0 = original_width / 5;
     int im_height0 = original_height / 5; //face detection
@@ -414,8 +388,7 @@ original_height);
             // CNN face detection 
             // Best detection rate
             //////////////////////////////////////////
-            //!!! The input image must be a BGR one (three-channel) 
-instead of RGB
+            //!!! The input image must be a BGR one (three-channel) instead of RGB
             //!!! DO NOT RELEASE pResults !!!
             TickMeter cvtm;
             cvtm.start();
@@ -424,8 +397,7 @@ instead of RGB
 #else
         int idx = 0;
 #endif
-            pResults = facedetect_cnn(pBuffers[idx], (unsigned 
-char*)(image.ptr(0)), image.cols, image.rows, (int)image.step);
+            pResults = facedetect_cnn(pBuffers[idx], (unsigned char*)(image.ptr(0)), image.cols, image.rows, (int)image.step);
             
             cvtm.stop();    
             printf("Face detection time = %gms\n", cvtm.getTimeMilli());
@@ -435,16 +407,14 @@ char*)(image.ptr(0)), image.cols, image.rows, (int)image.step);
             new_im_width = new_im_width0;//540
             new_im_height = new_im_height0;//290
             Mat result_image;
-            
-resize(frame,result_image,Size(new_im_width,new_im_height),INTER_LINEAR);
+            resize(frame,result_image,Size(new_im_width,new_im_height),INTER_LINEAR);
 
 
 
             int largest_indx_of_confidence = 0;
             for(int i = 0; i < (pResults ? *pResults : 0); i++) 
             {   
-                largest_indx_of_confidence = 
-((((short*)(pResults+1))+142*i)[0]>(((short*)(pResults+1))+142*largest_indx_of_confidence)[0])?i:largest_indx_of_confidence;
+                largest_indx_of_confidence = ((((short*)(pResults+1))+142*i)[0]>(((short*)(pResults+1))+142*largest_indx_of_confidence)[0])?i:largest_indx_of_confidence;
             }
                 
 
@@ -464,19 +434,15 @@ resize(frame,result_image,Size(new_im_width,new_im_height),INTER_LINEAR);
                     continue;
                 }
 
-                
-if((i==largest_indx_of_confidence)&&(confidence>50||(confidence<50&&confidence>30&&(w>20||h>20)))){
+                if((i==largest_indx_of_confidence)&&(confidence>50||(confidence<50&&confidence>30&&(w>20||h>20)))){
                     detected = 1;
-                    rectangle(result_image, Rect(x, y, w, h), Scalar(0, 0, 
-255), 2);
+                    rectangle(result_image, Rect(x, y, w, h), Scalar(0, 0, 255), 2);
                     if (centerx > 3*new_im_width/5 ){
-                        cv::putText(result_image, "RIGHT", cv::Point(x, 
-y+h-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);     
+                        cv::putText(result_image, "RIGHT", cv::Point(x, y+h-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);     
                         want_right(); 
                     }
                     else if (centerx < 2*new_im_width/5 ){
-                        cv::putText(result_image, "LEFT", cv::Point(x, 
-y+h-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
+                        cv::putText(result_image, "LEFT", cv::Point(x, y+h-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                         want_left();
                     }
                     else{
@@ -484,46 +450,31 @@ y+h-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);
                         if(w*h<im_width*im_height/18){
                             move_forward();
                         }
-                        // cv::putText(result_image, "CEN", cv::Point(x, 
-y+h+3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
+                        // cv::putText(result_image, "CEN", cv::Point(x, y+h+3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                     }
                 }
                 else{
-                    rectangle(result_image, Rect(x, y, w, h), Scalar(0, 
-255, 0), 2);
+                    rectangle(result_image, Rect(x, y, w, h), Scalar(0, 255, 0), 2);
                 }
 
                 //show the score of the face. Its range is [0-100]
                 char sScore[256];
                 snprintf(sScore, 256, "%d", confidence);
-                cv::putText(result_image, sScore, cv::Point(x, y-3), 
-cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
+                cv::putText(result_image, sScore, cv::Point(x, y-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                 
                 //draw face rectangle
                 
                 // draw five face landmarks in different colors
-                cv::circle(result_image, 
-cv::Point(p[5]*new_im_height/im_height, p[5 + 1]*new_im_height/im_height), 
-1, cv::Scalar(255, 0, 0), 2);
-                cv::circle(result_image, cv::Point(p[5 + 
-2]*new_im_height/im_height, p[5 + 3]*new_im_height/im_height), 1, 
-cv::Scalar(0, 0, 255), 2);
-                cv::circle(result_image, cv::Point(p[5 + 
-4]*new_im_height/im_height, p[5 + 5]*new_im_height/im_height), 1, 
-cv::Scalar(0, 255, 0), 2);
-                cv::circle(result_image, cv::Point(p[5 + 
-6]*new_im_height/im_height, p[5 + 7]*new_im_height/im_height), 1, 
-cv::Scalar(255, 0, 255), 2);
-                cv::circle(result_image, cv::Point(p[5 + 
-8]*new_im_height/im_height, p[5 + 9]*new_im_height/im_height), 1, 
-cv::Scalar(0, 255, 255), 2);
+                cv::circle(result_image, cv::Point(p[5]*new_im_height/im_height, p[5 + 1]*new_im_height/im_height), 1, cv::Scalar(255, 0, 0), 2);
+                cv::circle(result_image, cv::Point(p[5 + 2]*new_im_height/im_height, p[5 + 3]*new_im_height/im_height), 1, cv::Scalar(0, 0, 255), 2);
+                cv::circle(result_image, cv::Point(p[5 + 4]*new_im_height/im_height, p[5 + 5]*new_im_height/im_height), 1, cv::Scalar(0, 255, 0), 2);
+                cv::circle(result_image, cv::Point(p[5 + 6]*new_im_height/im_height, p[5 + 7]*new_im_height/im_height), 1, cv::Scalar(255, 0, 255), 2);
+                cv::circle(result_image, cv::Point(p[5 + 8]*new_im_height/im_height, p[5 + 9]*new_im_height/im_height), 1, cv::Scalar(0, 255, 255), 2);
                 
                 //print the result
-                printf("face %d: confidence=%d, [%d, %d, %d, %d] (%d,%d) 
-(%d,%d) (%d,%d) (%d,%d) (%d,%d)\n", 
+                printf("face %d: confidence=%d, [%d, %d, %d, %d] (%d,%d) (%d,%d) (%d,%d) (%d,%d) (%d,%d)\n", 
                         i, confidence, x, y, w, h, 
-                        p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12], 
-p[13], p[14]);
+                        p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12], p[13], p[14]);
 
             }
 
@@ -533,8 +484,7 @@ p[13], p[14]);
             resize(frame,image,Size(im_width,im_height),INTER_LINEAR);
 
 
-            // if(!(pResults ? *pResults : 0)||(((short*)(pResults+1)))[0] 
-< 50){
+            // if(!(pResults ? *pResults : 0)||(((short*)(pResults+1)))[0] < 50){
             if(!detected){
                 vector<Rect> found;
                 vector<double> weights;
@@ -542,20 +492,17 @@ p[13], p[14]);
                 TickMeter cvtm_body;
                 cvtm_body.start();
 
-                hog.detectMultiScale(image, found, weights, 0, Size(8,8), 
-Size(/*10,10*/12,12), 1.05, 2, false);
+                hog.detectMultiScale(image, found, weights, 0, Size(8,8), Size(/*10,10*/12,12), 1.05, 2, false);
                 // hog.detectMultiScale(image, found, weights);
 
                 cvtm_body.stop();    
-                printf("Body detection time = %gms\n", 
-cvtm_body.getTimeMilli());
+                printf("Body detection time = %gms\n", cvtm_body.getTimeMilli());
                 printf("%d bodies detected.\n", found.size());
                 int largest_indx_of_body = 0;
                 if(!detected){
                     for( size_t i = 0; i < found.size(); i++ )
                     {
-                        largest_indx_of_body = 
-(weights[i]>weights[largest_indx_of_body])?i:largest_indx_of_body;
+                        largest_indx_of_body = (weights[i]>weights[largest_indx_of_body])?i:largest_indx_of_body;
                     }
                 }
 
@@ -563,47 +510,33 @@ cvtm_body.getTimeMilli());
                 for( size_t i = 0; i < found.size(); i++ )
                 {
                     Rect r = found[i];
-                    if(i == largest_indx_of_body && 
-weights[largest_indx_of_body]>0.45){
-                        cv::rectangle(result_image, r, Scalar(0, 0, 255), 
-2);
+                    if(i == largest_indx_of_body && weights[largest_indx_of_body]>0.45){
+                        cv::rectangle(result_image, r, Scalar(0, 0, 255), 2);
                         detected = 1;
 
                         if (r.x + r.width/2 > 3*im_width/5 ){
-                            cv::putText(result_image, "RIGHT", 
-cv::Point(r.x, r.y+r.height-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
-cv::Scalar(0, 255, 0), 1);       
+                            cv::putText(result_image, "RIGHT", cv::Point(r.x, r.y+r.height-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                             want_right();
                         }
                         else if (r.x + r.width/2 < 2*im_width/5 ){
-                            cv::putText(result_image, "LEFT", 
-cv::Point(r.x, r.y+r.height-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
-cv::Scalar(0, 255, 0), 1);       
+                            cv::putText(result_image, "LEFT", cv::Point(r.x, r.y+r.height-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                             want_left();
                         }
                         else{
                             want_center();
-                            
-if(r.width*r.height<new_im_height*new_im_width/15){
+                            if(r.width*r.height<new_im_height*new_im_width/15){
                                 move_forward();
                             }
-                            // cv::putText(result_image, "CEN", 
-cv::Point(r.x, r.y+r.height+3), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
-cv::Scalar(0, 255, 0), 1);       
+                            // cv::putText(result_image, "CEN", cv::Point(r.x, r.y+r.height+3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);       
                         }   
                     }
                     else{
-                        cv::rectangle(result_image, found[i], 
-cv::Scalar(255,0,0), 3);
+                        cv::rectangle(result_image, found[i], cv::Scalar(255,0,0), 3);
                     }
                     stringstream temp;
                     temp << weights[i];
-                    cv::putText(result_image, temp.str(), 
-cv::Point(found[i].x, found[i].y-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, 
-cv::Scalar(0, 255, 0), 1); 
-                    // cv::putText(result_image, 
-temp.str(),Point(found[i].x,found[i].y+50), FONT_HERSHEY_SIMPLEX, 1, 
-Scalar(0,0,255));
+                    cv::putText(result_image, temp.str(), cv::Point(found[i].x, found[i].y-3), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1); 
+                    // cv::putText(result_image, temp.str(),Point(found[i].x,found[i].y+50), FONT_HERSHEY_SIMPLEX, 1, Scalar(0,0,255));
                     printf("Body confidence = %f\n", weights[i]);
                 }
 
@@ -613,8 +546,7 @@ Scalar(0,0,255));
 
             show_left_right(result_image,right_or_left);
             show_forwarding(result_image,is_forwarding);
-            resize(result_image,image,Size(original_width, 
-original_height),INTER_LINEAR);
+            resize(result_image,image,Size(original_width, original_height),INTER_LINEAR);
 #ifdef SHOW_IMAGE
             imshow("result", image);
 #endif
@@ -668,8 +600,7 @@ int main(int argc, char* argv[])
     #ifdef _OPENMP
         num_thread = omp_get_num_procs();
         omp_set_num_threads(num_thread);
-        printf("There are %d threads, %d processors.\n", num_thread, 
-omp_get_num_procs());
+        printf("There are %d threads, %d processors.\n", num_thread, omp_get_num_procs());
     #else
         num_thread = 1;
         printf("There is %d thread.\n", num_thread);
@@ -705,5 +636,4 @@ omp_get_num_procs());
     
 	return 0;
 }
-
 
