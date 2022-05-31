@@ -351,7 +351,7 @@ void voice()
     {
         // while(allzero_ans());
         cout << "Listening for voice commands:\n";
-        s = ((exec("python3 /home/pi/.mic_over_Mumble/asrt.py")));
+        s = ((exec("python3 ./asrt.py")));
         cout << "Listening Stopped.\n";
         cout << s;
         if (stoi(s) == 0)
