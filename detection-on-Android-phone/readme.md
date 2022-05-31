@@ -10,7 +10,7 @@ In prior, user should install wiringPi library.
 
 The `androidFaceDetectionAndTracking.slx` file is the Simulink source for the Android phone. To deploy it, simply open this file with MATLAB/Simulink, connect your phone to MATLAB Simulink, and click "Build, Deploy & Start" button to deploy the app onto the Android phone. You will then see a new app called "AndroidFaceDetection" on the phone. This is our customized app that will detect faces and transmit the face location to the Raspberry Pi.
 
-## Raspberry Pi C/C++ source code
+## Raspberry Pi C/C++ main source code
 
 This source code is the core controlling logic of the smart robot car. It is responsible for aggregating face detection data from the Android phone and the voice recognition data from a remote server, and determine the direction of the car corresponding to the two data. By default, the voice commmands have a higher priority.
 
@@ -28,7 +28,7 @@ Run this executable file with `./android_car`. You will see the output of the pr
 
 The executable bash file `VirtualMic.sh` sets up a voice transmitting server. It is responsible for receiving voice commands from the Android phone and send them to the Raspberry Pi. User might need to install Mumble on the host machine first. To run this program, run `sudo bash VirtualMic.sh`. It is suggested that to run this program in GUI Desktop, but it may also work with X11-forwarding properly set up. Then, the Plumble Android client can access the server and provides its microphone inputs.
 
-## Supplementary codes
+## Supplementary Codes
 
 ### `out.txt`
 
@@ -38,7 +38,14 @@ This is the one-to-one mapping from the UDP packets inputs to the corresponding 
 
 It records voice from the Android phone, automatically stops when the speaking is done, saves it to a `wav` file, sends the file to remote server in Base64 encoding, and returns different values according to the voice recognition result.
 
-### Speech recognition server
+### Speech Recognition Server
 
 `docker run --rm -it -p 80:20001 --name asrt-server -d ailemondocker/asrt_service:1.2.0` sets up the remote server dedicated for voice recognition. This can also be set up locally, so that the robot car will not need any Internet connection. However, the Raspberry Pi we've used is in ARM architecture, and the machine learning kit is only optimized for X86 architecture. Docker here is used for modularized management and simplicity. Note that the firewall configuration should be taken care of.
 
+### Obstacle Avoidance
+
+The `obstacle_avoidance.c` source file can detect and avoid obstacles. It uses ultrasonic and infrared sensors collaboratively to detect obstacles.
+
+### Trail Following
+
+The `trail_following.c` source file can let the car to follow the trail. It uses infrared sensor to detect the right path on the ground.
