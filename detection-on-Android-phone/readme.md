@@ -40,7 +40,11 @@ It records voice from the Android phone, automatically stops when the speaking i
 
 ### Speech Recognition Server
 
-`docker run --rm -it -p 80:20001 --name asrt-server -d ailemondocker/asrt_service:1.2.0` sets up the remote server dedicated for voice recognition. This can also be set up locally, so that the robot car will not need any Internet connection. However, the Raspberry Pi we've used is in ARM architecture, and the machine learning kit is only optimized for X86 architecture. Docker here is used for modularized management and simplicity. Note that the firewall configuration should be taken care of.
+We have a running server on jCloud that will remain running for the whole duration of the project. The server is set up to receive voice commands from the Android phone and send the recognition result to the Raspberry Pi. The server is set up to run on Ubuntu 18.04. 
+
+Location: `Host = '10.119.11.20', Port = '80'`(Only accessible from SJTU network).
+
+If you want to build your own server, `docker run --rm -it -p 80:20001 --name asrt-server -d ailemondocker/asrt_service:1.2.0` sets up the remote server dedicated for voice recognition. This can also be set up locally, so that the robot car will not need any Internet connection. However, the Raspberry Pi we've used is in ARM architecture, and the machine learning kit is only optimized for X86 architecture. Docker here is used for modularized management and simplicity. Note that the firewall configuration should be taken care of.
 
 ### Obstacle Avoidance
 

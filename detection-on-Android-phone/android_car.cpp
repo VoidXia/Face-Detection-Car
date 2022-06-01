@@ -236,31 +236,24 @@ void turn_right_voice()
 void turn_left()
 {
     mtx.lock();
-    softPwmWrite(4, 180); //左轮
+    softPwmWrite(4, 180); 
     softPwmWrite(1, 0);
-    softPwmWrite(6, 0); //右轮前进
+    softPwmWrite(6, 0); 
     softPwmWrite(5, 180);
-    // delay(200);
-    // stop();
-    // delay(time * 300);
     printf("Turning left.\n");
-    // SET GPIO TO 1
     mtx.unlock();
 }
+
 void turn_left_voice()
 {
     mtx.lock();
-    softPwmWrite(4, 250); //左轮
+    softPwmWrite(4, 250); 
     softPwmWrite(1, 0);
-    softPwmWrite(6, 0); //右轮前进
+    softPwmWrite(6, 0); 
     softPwmWrite(5, 250);
-    // delay(200);
-    // stop();
-    // delay(time * 300);
     printf("Turning left.\n");
     delay(900);
     stop();
-    // SET GPIO TO 1
     mtx.unlock();
 }
 
