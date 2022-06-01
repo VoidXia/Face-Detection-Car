@@ -4,6 +4,6 @@ This is the project for EI345 at SJTU and the Mathworks Excellance in Innovation
 
 See readme in the corresponding folder for detail. The version using Android phone is a revised and more advanced solution.
 
-[README - Detection on Android Phone with Simulink](./detection-on-Android-phone/readme.md)
+[README - Detection on Android Phone with Simulink (Advanced and Revised)](./detection-on-Android-phone/readme.md)
 
 [README - Detection on board with OpenCV](./detection-on-board/readme.md)
